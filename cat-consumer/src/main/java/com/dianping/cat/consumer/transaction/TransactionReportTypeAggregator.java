@@ -41,8 +41,14 @@ public class TransactionReportTypeAggregator extends BaseVisitor {
 		if (totalCountSum > 0) {
 			double line95Values = old.getLine95Value() * old.getTotalCount() + other.getLine95Value()
 			      * other.getTotalCount();
+			double line99Values = old.getLine99Value() * old.getTotalCount() + other.getLine99Value()
+                  * other.getTotalCount();
+			double line999Values = old.getLine999Value() * old.getTotalCount() + other.getLine999Value()
+                  * other.getTotalCount();
 
 			old.setLine95Value(line95Values / totalCountSum);
+			old.setLine99Value(line99Values / totalCountSum);
+			old.setLine999Value(line999Values / totalCountSum);
 		}
 		if (old.getTotalCount() > 0) {
 			old.setFailPercent(old.getFailCount() * 100.0 / old.getTotalCount());
@@ -72,9 +78,16 @@ public class TransactionReportTypeAggregator extends BaseVisitor {
 		old.setSum2(old.getSum2() + other.getSum2());
 
 		if (totalCountSum > 0) {
-			double line95Values = old.getLine95Value() * old.getTotalCount() + other.getLine95Value()
-			      * other.getTotalCount();
-			old.setLine95Value(line95Values / totalCountSum);
+		    double line95Values = old.getLine95Value() * old.getTotalCount() + other.getLine95Value()
+                  * other.getTotalCount();
+		    double line99Values = old.getLine99Value() * old.getTotalCount() + other.getLine99Value()
+		          * other.getTotalCount();
+		    double line999Values = old.getLine999Value() * old.getTotalCount() + other.getLine999Value()
+		          * other.getTotalCount();
+
+		    old.setLine95Value(line95Values / totalCountSum);
+		    old.setLine99Value(line99Values / totalCountSum);
+		    old.setLine999Value(line999Values / totalCountSum);
 		}
 		if (old.getTotalCount() > 0) {
 			old.setFailPercent(old.getFailCount() * 100.0 / old.getTotalCount());

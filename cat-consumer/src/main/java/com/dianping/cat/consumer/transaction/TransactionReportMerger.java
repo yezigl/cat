@@ -32,9 +32,12 @@ public class TransactionReportMerger extends DefaultMerger {
 			      * other.getTotalCount();
 			double line99Values = old.getLine99Value() * old.getTotalCount() + other.getLine99Value()
 			      * other.getTotalCount();
+			double line999Values = old.getLine999Value() * old.getTotalCount() + other.getLine999Value()
+                  * other.getTotalCount();
 
 			old.setLine95Value(line95Values / totalCountSum);
 			old.setLine99Value(line99Values / totalCountSum);
+			old.setLine999Value(line999Values / totalCountSum);
 		}
 
 		old.setTotalCount(totalCountSum);
@@ -98,9 +101,12 @@ public class TransactionReportMerger extends DefaultMerger {
 			      * other.getTotalCount();
 			double line99Values = old.getLine99Value() * old.getTotalCount() + other.getLine99Value()
 			      * other.getTotalCount();
+			double line999Values = old.getLine999Value() * old.getTotalCount() + other.getLine999Value()
+                  * other.getTotalCount();
 
 			old.setLine95Value(line95Values / totalCountSum);
 			old.setLine99Value(line99Values / totalCountSum);
+			old.setLine999Value(line999Values / totalCountSum);
 		}
 
 		old.setTotalCount(totalCountSum);

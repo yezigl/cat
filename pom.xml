@@ -16,6 +16,10 @@
         <module>cat-home</module>
         <module>cat-maven-plugin</module>
     </modules>
+    <properties>
+        <java.version>1.6</java.version>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -247,8 +251,14 @@ org.eclipse.jdt.core.compiler.compliance=1.6
             <url>https://raw.github.com/dianping/cat/mvn-repo</url>
         </pluginRepository>
     </pluginRepositories>
-    <properties>
-        <java.version>1.6</java.version>
-        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-    </properties>
+    <distributionManagement>
+        <repository>
+            <id>focus-nexus-releases</id>
+            <url>http://nexus.inner.focus.cn/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>focus-nexus-deployment</id>
+            <url>http://nexus.inner.focus.cn/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

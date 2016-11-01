@@ -89,7 +89,8 @@
 				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=max">Max</a>(ms)</th>
 				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=avg">Avg</a>(ms)</th>
 				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=95line">95Line</a>(ms)</th>
-				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=99line">99.9Line</a>(ms)</th>
+                <th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=99line">99Line</a>(ms)</th>
+				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=999line">99.9Line</a>(ms)</th>
 				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=std">Std</a>(ms)</th>
 				<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&sort=total">QPS</a></th>
 			</tr>
@@ -113,6 +114,7 @@
 					<td>${w:format(e.avg,'###,##0.0')}</td>
 					<td>${w:format(e.line95Value,'###,##0.0')}</td>
 					<td>${w:format(e.line99Value,'###,##0.0')}</td>
+                    <td>${w:format(e.line999Value,'###,##0.0')}</td>
 					<td>${w:format(e.std,'###,##0.0')}</td>
 					<td>${w:format(e.tps,'###,##0.0')}</td>
 				</tr>
@@ -145,7 +147,8 @@
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=max&queryname=${model.queryName}">max</a>(ms)</th>
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=avg&queryname=${model.queryName}">Avg</a>(ms)</th>
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=95line&queryname=${model.queryName}">95Line</a>(ms)</th>
-			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=99line&queryname=${model.queryName}">99.9Line</a>(ms)</th>
+            <th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=99line&queryname=${model.queryName}">99Line</a>(ms)</th>
+			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=999line&queryname=${model.queryName}">99.9Line</a>(ms)</th>
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=std&queryname=${model.queryName}">Std</a>(ms)</th>
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=total&queryname=${model.queryName}">QPS</a></th>
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=total&queryname=${model.queryName}">Percent%</a></th>
@@ -181,10 +184,12 @@
 						<c:when test="${status.index > 0}">
 							<td>${w:format(e.line95Value,'###,##0.0')}</td>
 							<td>${w:format(e.line99Value,'###,##0.0')}</td>
+                            <td>${w:format(e.line999Value,'###,##0.0')}</td>
 						</c:when>
 						<c:otherwise>
 							<td class="center">-</td>
 							<td class="center">-</td>
+                            <td class="center">-</td>
 						</c:otherwise>
 					</c:choose>
 					<td>${w:format(e.std,'###,##0.0')}</td>

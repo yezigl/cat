@@ -72,9 +72,11 @@ public class TransactionStatisticsComputer extends BaseVisitor {
 			name.setStd(std);
 
 			double line95 = computeLineValue(name.getAllDurations(), 95);
+			double line99 = computeLineValue(name.getAllDurations(), 99);
 			double line999 = computeLineValue(name.getAllDurations(), 99.9);
 			name.setLine95Value(line95);
-			name.setLine99Value(line999);
+			name.setLine99Value(line99);
+			name.setLine999Value(line999);
 		}
 		if (m_duration > 0) {
 			name.setTps(name.getTotalCount() * 1.0 / m_duration);
@@ -105,9 +107,11 @@ public class TransactionStatisticsComputer extends BaseVisitor {
 			type.setStd(std);
 
 			double line95 = computeLineValue(type.getAllDurations(), 95);
+			double line99 = computeLineValue(type.getAllDurations(), 99);
 			double line999 = computeLineValue(type.getAllDurations(), 99.9);
 			type.setLine95Value(line95);
-			type.setLine99Value(line999);
+			type.setLine99Value(line99);
+			type.setLine999Value(line999);
 
 			if (m_duration > 0) {
 				type.setTps(type.getTotalCount() * 1.0 / m_duration);
