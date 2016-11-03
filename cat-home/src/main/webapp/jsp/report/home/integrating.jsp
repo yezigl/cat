@@ -18,11 +18,10 @@
     </filter-mapping>
 	</xmp>
   </dd>
-  <h5 class="text-danger">struts会吃掉URL中的ERROR信息，请在配置中加
+  <h5 class="text-danger">struts会吃掉URL中的ERROR信息，请在配置中加</h5>
   <xmp class="well">
   <constant name="struts.handle.exception" value="false" /> 
   </xmp>
-  </h5>
   <h5 class="text-danger">解决URL中很多重复的问题，比如restfull的url</h5>
   <xmp class="well">
   CAT 提供了自定义的URL的name功能，只要在HttpServletRequest的设置一个Attribute，
@@ -42,14 +41,29 @@
   </xmp>
   </dd>
   <dt><h5 class="text-success">3、配置domain (cat-core 1.1.3之后版本，优先读取A配置)</h5></dt>
-   <p class="text-danger">A) 在资源文件中新建app.properties文件</p>
-   <dd><p class="detailContent">在resources资源文件META-INF下，注意是<span class="text-danger">src/main/resources/META-INF/</span>文件夹，
+  <p class="text-danger detailContent">注：由于公司Docker镜像中没有/data/appdatas/cat/目录，请参考C配置，同时跳过第4步</p>
+  <p class="text-danger">A) 在资源文件中新建app.properties文件</p>
+  <dd><p class="detailContent">在resources资源文件META-INF下，注意是<span class="text-danger">src/main/resources/META-INF/</span>文件夹，
   而不是<span class="text-danger">webapps下的那个META-INF</span>,添加<span class="text-danger">app.properties</span>，加上domain配置，如：<span class="text-danger">app.name=tuangou-web</span></p>
+  </dd>
   <p class="text-danger"> B) 在资源文件中新建client.xml文件</p>
   <dd><p class="detailContent">在resources资源文件META-INF下，新建cat文件夹，注意是<span class="text-danger">src/main/resources/META-INF/cat/client.xml</span>文件，
   而不是<span class="text-danger">webapps下的那个META-INF</span>,domain id表示项目名称<span class="text-danger">此处为CMDB申请的名字，比如</span></p>
   <xmp class="well">
   <config mode="client">
+      <domain id="tuangou-web"/>
+  </config>
+  </xmp>
+  </dd>
+  <p class="text-danger">C) 在资源文件中新建client.xml文件</p>
+  <dd><p class="detailContent">在resources资源文件META-INF下，新建cat文件夹，注意是<span class="text-danger">src/main/resources/META-INF/cat/client.xml</span>文件，
+  而不是<span class="text-danger">webapps下的那个META-INF</span>,domain id表示项目名称<span class="text-danger">此处为CMDB申请的名字，比如</span></p>
+  <xmp class="well">
+  <config mode="client">
+      <servers>
+          <server ip="10.16.11.214" port="2280" http-port="8088" />
+          <server ip="10.16.11.215" port="2280" http-port="8088" />
+      </servers>
       <domain id="tuangou-web"/>
   </config>
   </xmp>
@@ -64,7 +78,8 @@
   <xmp class="well">
   <config mode="client">
       <servers>
-         <server ip="192.168.213.115" port="2280" />
+          <server ip="10.16.11.214" port="2280" http-port="8088" />
+          <server ip="10.16.11.215" port="2280" http-port="8088" />
      </servers>
   </config>
   </xmp>
@@ -74,10 +89,10 @@
   <p>b、<span class="text-danger">配置可以加入CAT的开关，用于关闭CAT消息发送,将enabled改为false，如下表示将mobile-api这个项目关闭</span></p>
   <xmp class="well">
   <config mode="client">
-    <servers>
-        <server ip="192.168.213.115" port="2280" />
-    </servers>
-    <domain id="mobile-api" enabled="false"/>
+      <servers>
+          <server ip="192.168.213.115" port="2280" />
+      </servers>
+      <domain id="mobile-api" enabled="false"/>
   </config>
   </xmp>
   </dd>
@@ -90,16 +105,16 @@
   <p>b）在Root的节点中加入catAppender</p>
   <xmp class="well">
   <root>
-    <level value="error" />
-    <appender-ref ref="catAppender" />
+      <level value="error" />
+      <appender-ref ref="catAppender" />
   </root>
   </xmp>
   <p class="text-danger">c）注意有一些Log的是不继承root的，需要如下配置</p>
   <xmp class="well">
   <logger name="com.dianping.api.location" additivity="false">
-    <level value="INFO"/>
-    <appender-ref ref="locationAppender"/>
-    <appender-ref ref="catAppender"/>
+      <level value="INFO"/>
+      <appender-ref ref="locationAppender"/>
+      <appender-ref ref="catAppender"/>
   </logger>
   </xmp>
   </dd>
