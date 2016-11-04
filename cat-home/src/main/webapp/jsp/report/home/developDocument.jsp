@@ -27,33 +27,34 @@
 	  <imgages src="../imgages/transactionGuide.jpg"/>
 	  <br/>
 	  <p><strong class="text-info">Transaction API</strong></p>
-	  <code>
-	  	com.dianping.cat.message.MessageProducer:<br/>
-        Transaction newTransaction(String type, String name);<br/>
-		com.dianping.cat.message.Transaction:<br/>
-        void addData(String keyValuePairs);<br/>
-        void addData(String key, Object value);<br/>
-        void setStatus(String status);<br/>
-        void complete();<br/>
-	  </code>  
-	  <p><strong class="text-info">代码示例</strong></p>
+	  <xmp class="well">
+      com.dianping.cat.message.MessageProducer:
+      Transaction newTransaction(String type, String name);
+        
+      com.dianping.cat.message.Transaction:
+      void addData(String keyValuePairs);
+      void addData(String key, Object value);
+      void setStatus(String status);
+      void complete();
+	  </xmp>  
+	  <p><strong class="text-info">代码示例（6.埋点示例里有注解的使用方式）</strong></p>
 	  
 	  <xmp class="well">
-     Transaction t = Cat.getProducer().newTransaction("your transaction type", "your transaction name");
-     try {
-                 yourBusinessOperation();
-                Cat.getProducer().logEvent("your event type", "your event name", Event.SUCCESS, "keyValuePairs")
-                t.setStatus(Transaction.SUCCESS);
-     } catch (Exception e) {
-            Cat.getProducer().logError(e);//用log4j记录系统异常，以便在Logview中看到此信息
-            t.setStatus(e);
-            throw e; 
-            	  (CAT所有的API都可以单独使用，也可以组合使用，比如Transaction中嵌套Event或者Metric。)
-                  (注意如果这里希望异常继续向上抛，需要继续向上抛出，往往需要抛出异常，让上层应用知道。)
-                  (如果认为这个异常在这边可以被吃掉，则不需要在抛出异常。)
-     } finally {
-           t.complete();
-     }
+      Transaction t = Cat.getProducer().newTransaction("your transaction type", "your transaction name");
+      try {
+          yourBusinessOperation();
+          Cat.getProducer().logEvent("your event type", "your event name", Event.SUCCESS, "keyValuePairs")
+          t.setStatus(Transaction.SUCCESS);
+      } catch (Exception e) {
+          Cat.getProducer().logError(e);//用log4j记录系统异常，以便在Logview中看到此信息
+          t.setStatus(e);
+          throw e; 
+          (CAT所有的API都可以单独使用，也可以组合使用，比如Transaction中嵌套Event或者Metric。)
+          (注意如果这里希望异常继续向上抛，需要继续向上抛出，往往需要抛出异常，让上层应用知道。)
+          (如果认为这个异常在这边可以被吃掉，则不需要在抛出异常。)
+      } finally {
+          t.complete();
+      }
 	  </xmp>
 	  
   </dd>
@@ -77,4 +78,25 @@
     <h5 class="text-danger">Transaction的埋点一定要complete，切记放在finally里面。</h5>
 	
 	<img  class="img-polaroid"  width='60%' src="${model.webapp}/images/develop05.png"/>
+    <h5 class="text-danger">Transaction注解的使用方式</h5>
+    <xmp class="well">
+    <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cat="http://code.dianping.com/schema/cat"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.dianping.com/schema/cat http://code.dianping.com/schema/cat/cat-1.0.xsd">
+        
+        <cat:annotation-driven />
+    </beans>
+    </xmp>
+    <xmp class="well">
+    @Service
+    public class SampleService {
+        
+        @CatTransaction
+        public int insert(Sample sample) {
+            ...
+        }
+        
+    }
+    </xmp>
 </dl>
