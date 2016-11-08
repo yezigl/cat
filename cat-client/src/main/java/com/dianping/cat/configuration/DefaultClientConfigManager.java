@@ -227,6 +227,12 @@ public class DefaultClientConfigManager implements LogEnabled, ClientConfigManag
 
 			if (clientConfig != null) {
 				clientConfig.accept(new ClientConfigValidator());
+				// 测试环境的domain id加一个.test后缀
+				Map<String, Domain> domains = clientConfig.getDomains();
+	            Domain domain = domains.isEmpty() ? null : domains.values().iterator().next();
+	            if (domain != null) {
+	                domain.setId(ClientConfigUtils.getDomainId(domain.getId()));
+	            }
 			}
 
 			m_config = clientConfig;
