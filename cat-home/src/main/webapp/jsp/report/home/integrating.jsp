@@ -118,5 +118,11 @@
   </logger>
   </xmp>
   </dd>
+  <dt><h5 class="text-success">6.区分开发测试与线上环境</h5></dt>
+  <dd>
+    <p>因为目前只有一套CAT环境，所以在开发/测试环境下，CAT会默认在domain后添加.test后缀</p>
+    <p>指定环境有两种方式：1、指定系统环境变量ENV &nbsp;&nbsp; 2、添加java运行时参数-DENV</p>
+    <p>如果不指定ENV=product，默认为开发/测试环境</p>
+  </dd>
 </dl>
 
