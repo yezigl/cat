@@ -14,6 +14,8 @@ public class ClientConfigUtils {
     private static final String ENV_PRODUCT = "product";
 
     private static final String TEST_SUFFIX = ".test";
+    
+    private static final String DOMAIN_CAT = "cat";
 
     /**
      * 是否测试环境
@@ -32,6 +34,9 @@ public class ClientConfigUtils {
     }
 
     public static String getDomainId(String domain) {
+        if (domain.equals(DOMAIN_CAT)) {
+            return domain;
+        }
         if (isTestEnv()) {
             if (domain.contains(TEST_SUFFIX)) {
                 return domain;
