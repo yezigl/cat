@@ -231,6 +231,12 @@ org.eclipse.jdt.core.compiler.compliance=1.6
     </build>
     <repositories>
         <repository>
+            <id>focus-nexus</id>
+            <name>Focus Nexus</name>
+            <layout>default</layout>
+            <url>http://nexus.inner.focus.cn/nexus/content/groups/public</url>            
+        </repository>
+        <repository>
             <id>central</id>
             <name>Maven2 Central Repository</name>
             <layout>default</layout>
@@ -242,6 +248,10 @@ org.eclipse.jdt.core.compiler.compliance=1.6
         </repository>
     </repositories>
     <pluginRepositories>
+        <pluginRepository>
+            <id>focus-nexus</id>
+            <url>http://nexus.inner.focus.cn/nexus/content/groups/public</url>
+        </pluginRepository>
         <pluginRepository>
             <id>central</id>
             <url>http://repo1.maven.org/maven2</url>
