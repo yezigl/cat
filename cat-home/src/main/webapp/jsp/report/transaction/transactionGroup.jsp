@@ -119,14 +119,14 @@
 					<td>${w:format(e.tps,'###,##0.0')}</td>
 				</tr>
 				<tr class="graphs">
-							<td colspan="13" style="display: none"><div id="${status.index}"
+							<td colspan="14" style="display: none"><div id="${status.index}"
 									style="display: none"></div></td>
 						</tr><tr></tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
 			<tr>
-						<th class="left" colspan="13"><input type="text"
+						<th class="left" colspan="14"><input type="text"
 							name="queryname" id="queryname" size="40"
 							value="${model.queryName}">
 		    <input class="btn btn-primary  btn-sm" value="Filter"
@@ -154,7 +154,7 @@
 			<th class="right"><a href="?op=groupReport&domain=${model.domain}&date=${model.date}&group=${payload.group}&type=${payload.encodedType}&sort=total&queryname=${model.queryName}">Percent%</a></th>
 					</tr>
 			<tr class="graphs">
-						<td colspan="13" style="display: none"><div id="-1" style="display: none"></div></td>
+						<td colspan="14" style="display: none"><div id="-1" style="display: none"></div></td>
 					</tr>
 			<c:forEach var="item" items="${model.displayNameReport.results}"
 						varStatus="status">
@@ -197,7 +197,7 @@
 					<td>${w:format(e.totalPercent,'0.00%')}</td>
 				</tr>
 				<tr class="graphs">
-							<td colspan="13" style="display: none"><div id="${status.index}"
+							<td colspan="14" style="display: none"><div id="${status.index}"
 									style="display: none"></div></td>
 						</tr><tr></tr>
 			</c:forEach>

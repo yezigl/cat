@@ -94,12 +94,12 @@
 					<td>${w:format(e.std,'###,##0.0')}</td>
 					<td>${w:format(e.tps,'###,##0.0')}</td>
 				</tr>
-				<tr class="graphs"><td colspan="13" style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
+				<tr class="graphs"><td colspan="14" style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
 				<tr style="display:none"></tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr><th class="left" colspan="13"><input type="text" name="queryname" id="queryname" size="40" value="${model.queryName}">
+			<tr><th class="left" colspan="14"><input type="text" name="queryname" id="queryname" size="40" value="${model.queryName}">
 		    <input  class="btn btn-primary  btn-sm"  value="Filter" onclick="selectByName('${model.date}','${model.domain}','${model.ipAddress}','${payload.type}')" type="submit">
 			支持多个字符串查询，例如sql|url|task，查询结果为包含任一sql、url、task的列。
 			</th></tr>
@@ -119,7 +119,7 @@
 			<th class="right"><a href="?domain=${model.domain}&date=${model.date}&ip=${model.ipAddress}&type=${payload.encodedType}&sort=std&queryname=${model.queryName}">Std</a>(ms)</th>
 			<th class="right"><a href="?domain=${model.domain}&date=${model.date}&ip=${model.ipAddress}&type=${payload.encodedType}&sort=total&queryname=${model.queryName}">QPS</a></th>
 			<th class="right"><a href="?domain=${model.domain}&date=${model.date}&ip=${model.ipAddress}&type=${payload.encodedType}&sort=total&queryname=${model.queryName}">Percent%</a></th></tr>
-			<tr class="graphs"><td colspan="13" style="display:none"><div id="-1" style="display:none"></div></td></tr>
+			<tr class="graphs"><td colspan="14" style="display:none"><div id="-1" style="display:none"></div></td></tr>
 			<c:forEach var="item" items="${model.displayNameReport.results}" varStatus="status">
 				<c:set var="e" value="${item.detail}"/>
 				<c:set var="lastIndex" value="${status.index}"/>
@@ -157,7 +157,7 @@
 					<td>${w:format(e.tps,'###,##0.0')}</td>
 					<td>${w:format(e.totalPercent,'0.00%')}</td>
 				</tr>
-				<tr class="	"><td colspan="13" style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
+				<tr class="	"><td colspan="14" style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
 				<tr></tr>
 			</c:forEach>
 		</c:otherwise>

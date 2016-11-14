@@ -108,14 +108,14 @@
 					<td>${w:format(e.tps,'0.0')}</td>
 				</tr>
 				<tr class="graphs">
-					<td colspan="12" style="display: none"><div id="${status.index}"
+					<td colspan="14" style="display: none"><div id="${status.index}"
 								style="display: none"></div></td>
 					</tr><tr></tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
 		<tr>
-						<th style="text-align: left;" colspan='13'>
+						<th style="text-align: left;" colspan="14">
 			<input type="text" id="queryname" size="40"
 							value="${model.queryName}">
 		    <input class="btn btn-primary btn-sm" value="Filter"
@@ -193,7 +193,7 @@
 					<td>${w:format(e.totalPercent,'0.00%')}</td>
 				</tr>
 				<tr class="graphs">
-						<td colspan="12" style="display: none"><div id="${status.index}" style="display: none"></div></td>
+						<td colspan="14" style="display: none"><div id="${status.index}" style="display: none"></div></td>
 				</tr>
 				<tr></tr>
 			</c:forEach>

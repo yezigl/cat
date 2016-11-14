@@ -1,12 +1,13 @@
 package com.dianping.cat.servlet;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -32,10 +33,10 @@ import com.dianping.cat.message.internal.DefaultTransaction;
 import com.dianping.cat.message.spi.MessageTree;
 
 public class CatFilter implements Filter {
-	private static Map<MessageFormat, String> s_patterns = new LinkedHashMap<MessageFormat, String>();
+	private static Map<Pattern, String> s_patterns = new LinkedHashMap<Pattern, String>();
 
 	private List<Handler> m_handlers = new ArrayList<Handler>();
-
+	
 	@Override
 	public void destroy() {
 	}
@@ -63,7 +64,7 @@ public class CatFilter implements Filter {
 				for (String temp : patterns) {
 					String[] temps = temp.split(":");
 
-					s_patterns.put(new MessageFormat(temps[0].trim()), temps[1].trim());
+					s_patterns.put(Pattern.compile(temps[0].trim()), temps[1].trim());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -290,16 +291,12 @@ public class CatFilter implements Filter {
 				if (s_patterns.size() == 0) {
 					return requestURI;
 				} else {
-					for (Entry<MessageFormat, String> entry : s_patterns.entrySet()) {
-						MessageFormat format = entry.getKey();
-
-						try {
-							format.parse(requestURI);
-
-							return entry.getValue();
-						} catch (Exception e) {
-							// ignore
-						}
+					for (Entry<Pattern, String> entry : s_patterns.entrySet()) {
+					    Pattern pattern = entry.getKey();
+					    Matcher matcher = pattern.matcher(requestURI);
+					    if (matcher.find()) {
+					        return entry.getValue();
+					    }
 					}
 					return requestURI;
 				}

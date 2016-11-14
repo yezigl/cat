@@ -93,12 +93,12 @@
 					<td>${w:format(e.std,'0.0')}</td>
 					<td>${w:format(e.tps,'0.0')}</td>
 				</tr>
-				<tr class="graphs"><td colspan="13"  style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
+				<tr class="graphs"><td colspan="14"  style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
 				<tr></tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-		<tr><th  style="text-align:left;" colspan='13'>
+		<tr><th  style="text-align:left;" colspan="14">
 			<input type="text" id="queryname" size="40"  value="${model.queryName}">
 		    <input  class="btn btn-primary btn-sm"  value="Filter" onclick="filterByName('${model.date}','${model.domain}','${model.ipAddress}','${payload.type}')" type="submit">
 		    支持多个字符串查询，例如sql|url|task，查询结果为包含任一sql、url、task的列
@@ -155,7 +155,7 @@
 					<td>${w:format(e.tps,'0.0')}</td>
 					<td>${w:format(e.totalPercent,'0.00%')}</td>
 				</tr>
-				<tr class="graphs"><td colspan="13"  style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
+				<tr class="graphs"><td colspan="14"  style="display:none"><div id="${status.index}" style="display:none"></div></td></tr>
 				<tr></tr>
 			</c:forEach>
 		</c:otherwise>
