@@ -18,8 +18,7 @@ public class CatBeanDefinitionParser implements BeanDefinitionParser {
     public BeanDefinition parse(Element element, ParserContext parserContext) {
         Object source = parserContext.extractSource(element);
 
-        // Register component for the surrounding <crane:annotation-driven>
-        // element.
+        // Register component for the surrounding <cat:annotation-driven> element.
         CompositeComponentDefinition compDefinition = new CompositeComponentDefinition(element.getTagName(), source);
         parserContext.pushContainingComponent(compDefinition);
 
