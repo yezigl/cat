@@ -2,12 +2,7 @@ package com.dianping.cat.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,10 +25,9 @@ import com.dianping.cat.message.internal.DefaultMessageManager;
 import com.dianping.cat.message.internal.DefaultTransaction;
 
 public class CatFilter implements Filter {
-	private static Map<Pattern, String> s_patterns = new LinkedHashMap<Pattern, String>();
 
 	private List<Handler> m_handlers = new ArrayList<Handler>();
-	
+
 	@Override
 	public void destroy() {
 	}
@@ -52,21 +46,6 @@ public class CatFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		String pattern = filterConfig.getInitParameter("pattern");
-
-		if (pattern != null) {
-			try {
-				String[] patterns = pattern.split(";");
-
-				for (String temp : patterns) {
-					String[] temps = temp.split(":");
-					s_patterns.put(Pattern.compile(temps[0].trim()), temps[1].trim());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
 		m_handlers.add(CatHandler.ENVIRONMENT);
 		m_handlers.add(CatHandler.LOG_SPAN);
 		m_handlers.add(CatHandler.LOG_CLIENT_PAYLOAD);
@@ -226,17 +205,6 @@ public class CatFilter implements Filter {
 
 			private String getRequestURI(HttpServletRequest req) {
 				String url = req.getRequestURI();
-				if (!s_patterns.isEmpty()) {
-                    for (Entry<Pattern, String> entry : s_patterns.entrySet()) {
-                        Pattern pattern = entry.getKey();
-                        Matcher matcher = pattern.matcher(url);
-                        if (matcher.find()) {
-                            return entry.getValue();
-                        }
-                    }
-                    return url;
-                }
-				// 判断REST形式的url，但这里只判断了数字，感觉用处并不大
 				int length = url.length();
 				StringBuilder sb = new StringBuilder(length);
 
@@ -253,7 +221,7 @@ public class CatFilter implements Filter {
 						for (int j = index + 1; j < length; j++) {
 							char next = url.charAt(j);
 
-							if ((first || isNumber) && next != SPLIT) {
+							if ((first || isNumber == true) && next != SPLIT) {
 								isNumber = isNumber(next);
 								first = false;
 							}

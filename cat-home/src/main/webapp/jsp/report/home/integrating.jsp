@@ -36,7 +36,7 @@
   <dependency>
        <groupId>com.dianping.cat</groupId>
        <artifactId>cat-core</artifactId>   
-       <version>1.3.7</version>
+       <version>1.4.0-SNAPSHOT</version>
   </dependency>
   </xmp>
   </dd>
