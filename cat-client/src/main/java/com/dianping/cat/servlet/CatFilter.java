@@ -234,7 +234,6 @@ public class CatFilter implements Filter {
                             return entry.getValue();
                         }
                     }
-                    return url;
                 }
 				// 判断REST形式的url，但这里只判断了数字，感觉用处并不大
 				int length = url.length();
