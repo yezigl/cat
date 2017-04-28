@@ -3,6 +3,9 @@
  */
 package com.dianping.cat.configuration;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 工具类
  *
@@ -11,7 +14,7 @@ package com.dianping.cat.configuration;
  */
 public class ClientConfigUtils {
 
-    private static final String ENV_PRODUCT = "product";
+    private static final List<String> ENV_PRODUCT = Arrays.asList("product", "prod", "work");
 
     private static final String TEST_SUFFIX = ".test";
     
@@ -23,12 +26,12 @@ public class ClientConfigUtils {
      * @return
      */
     public static boolean isTestEnv() {
-        String env = System.getProperty("ENV");
+        String env = System.getProperty("spring.profiles.active");
         if (env == null) {
-            env = System.getenv("ENV");
+            env = System.getenv("spring.profiles.active");
         }
         if (env != null) {
-            return !ENV_PRODUCT.equalsIgnoreCase(env);
+            return !ENV_PRODUCT.contains(env.toLowerCase());
         }
         return true;
     }
